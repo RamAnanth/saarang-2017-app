@@ -1,0 +1,172 @@
+<html>
+ <head>
+	<style type="text/css">
+		
+/*sets background color as red for invalid input fields*/
+       input.ng-invalid{
+
+       	background-color: rgba(255,0,0,0.1);
+       }
+
+		body
+		{margin: 0px;
+        
+		}
+	
+/*Styling div to give a bordered box feel*/
+	.form{
+		margin-top:3%; 
+		padding-left:2%; 
+		padding-top:2%;
+	    left: 34%;
+        top:0px;
+        height:78%;
+        background:#f1f1f1;
+        width:500px;
+        border-style:solid;
+        border-width: 1px;
+        border-radius:20px; 
+	}
+	/*Setting width of input fields*/
+	input[type="text"],input[type="email"]
+	{
+		width: 250px;
+	}
+	
+	#reg-form label
+	{
+	font-weight: bolder;
+    
+	}
+
+   #reg-form
+   {
+   	margin-left: 5%;
+   }
+	
+	/*Displaying error messages in red*/
+	.err
+	{color: red;
+	}
+	
+/*Making image center of div*/
+	#navimg
+	{
+	margin-left: 35%;
+	}
+	/*Aligning heading as much as possible*/
+	#navh
+	{
+	margin-left: 42%;
+	}
+
+
+
+
+	</style>
+ <script type="text/javascript" src="angular.min.js"></script>
+ <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+ </head>
+<!-- setting body background color -->
+<body style="background-color: rgba(241,225,18,0.8);">
+	<!-- Navbar -->
+	<div class="navbar navbar-default">
+	
+	<h1 id="navh">Registration Form</h1>
+	</div>
+     <!-- The container around form -->
+     <div class=" form col-md-4 col-sm-4 col-xs-12 row">
+	<!-- registration form -->
+	<form name="regForm" id="reg-form" ng-app="myApp" ng-controller="myController"  novalidate>
+		<!-- Saarang logo -->
+		<img id="navimg"src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTrAsKrfX9dOQDg16SV9jhpur4DXd3Web_b6vd_DK5nAgC73o1J" height="100" width="100"><br><br><br>
+<!-- Name input field -->
+	    <label>Name</label><br><br>
+		<input type="text" placeholder=" Type your name here" name="myName" ng-model="myName" required>
+        <!-- Invalid name -->
+        <span class="err" ng-show="submitted&& regForm.myName.$invalid">                      
+  		<label ng-show="regForm.myName.$error.required">&nbsp;The Name is required</label>
+  		</span><br><br>
+<!-- Input field for saarang id -->
+		<label>Saarang Id</label><br><br>
+		
+		<input type="text" placeholder=" Enter Saarang id number" name="sid" ng-model="sid" required>
+		     <!-- Invalid Saarang ID-->
+		<span class="err" ng-show="submitted&& regForm.sid.$invalid">                      
+  		<label ng-show="regForm.sid.$error.required">&nbsp;The Saarang ID is required</label>
+  		</span><br><br>
+<!-- Input field for mobile number -->
+		<label>Mobile Number</label><br><br>
+		<input type="number" placeholder=" Enter Contact number" name="mobno" ng-model="mobno" ng-maxlength=
+		"10" ng-minlength="10" required>
+ 		     <!-- Invalid mobile number -->
+ 		<span class="err" ng-show="submitted && regForm.mobno.$invalid">                      
+  		<!-- If it is not 10 digits -->
+  		<label ng-show="(regForm.mobno.$error.minlength||regForm.mobno.$error.maxlength)&&regForm.mobno.$error.number">&nbsp;Enter 10 digit number</label>
+  		<!-- If it is left blank -->
+  		<label ng-show="regForm.mobno.$error.required">&nbsp;Mobile Number is required</label>
+  		</span><br><br>
+<!-- Input field for email id-->
+		<label>Email Id</label><br><br>
+		<input type="email" placeholder=" Enter email id" name="mail" ng-model="mail" required>
+            <!-- Invalid email -->
+        <span class="err" ng-show="submitted && regForm.mail.$invalid">                      
+  		<!-- If it is left empty -->
+  		<label ng-show="regForm.mail.$error.required">&nbsp;Email is required</label>
+  		     <!-- If it is inavlid email id-->
+  		<label ng-show="regForm.mail.$error.email">&nbsp;Enter valid email id</label>
+  		</span><br><br><br>
+
+<!-- Event select option -->
+       <label> Which Event do you want to participate in?</label><br>
+		<select name="eve" ng-model="eve" ng-options="event for event in events" required>
+
+		</select>
+		     <!-- Event not selected -->
+		<span class="err">                      
+  		<label ng-show="submitted&&regForm.eve.$error.required">&nbsp;Please select an event</label>
+  		</span><br><br><br><br>
+<!-- Submit button(check error on click) -->
+        <input type="submit" id="submit" class="btn btn-primary" value="Submit" ng-click="register()">
+	    <!-- Indication of form validity -->
+	    <button class="btn btn-success" ng-show="regForm.$valid&&submitted" disabled="true">Submitted Succcesfully</button> 
+	</form>
+	</div>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	var app=angular.module("myApp",[]);
+	  
+	  app.controller("myController",function($scope){
+         
+            $scope.submitted=false;
+           // Array  containing few events
+           $scope.events=["Quiz",
+           	"Tarang",
+           "Word Games",
+           "Panache",
+           "JAM",
+           "Freestyle"];
+           // Function that is called on clicking submit
+           // Sets value of submitted to true
+            $scope.register=function()
+            {
+            	$scope.submitted=true;
+
+            }
+      
+           
+            });
+
+
+
+</script>
+</body>
