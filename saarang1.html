@@ -1,0 +1,152 @@
+<html>
+ <head>
+	<style type="text/css">
+		
+
+       input.ng-invalid{
+
+       	background-color: rgba(255,0,0,0.1);
+       }
+
+		body
+		{margin: 0px;
+        
+		}
+	
+
+	.form{
+		margin-top:3%; 
+		padding-left:2%; 
+		padding-top:2%;
+	    left: 34%;
+        top:0px;
+        height:78%;
+        background:#f1f1f1;
+        width:500px;
+        border-style:solid;
+        border-width: 1px;
+        border-radius:20px; 
+	}
+	
+	input[type="text"],input[type="email"]
+	{
+		width: 250px;
+	}
+	
+	#reg-form label
+	{
+	font-weight: bolder;
+    
+	}
+
+   #reg-form
+   {
+   	margin-left: 5%;
+   }
+	.err
+	{color: red;}
+	#navimg
+	{
+	margin-left: 35%;
+	}
+	#navh
+	{
+	margin-left: 42%;
+	}
+
+
+
+
+	</style>
+ <script type="text/javascript" src="angular.min.js"></script>
+ <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+ </head>
+<body style="background-color: rgba(241,225,18,0.8);">
+	
+	<div class="navbar navbar-default">
+	
+	<h1 id="navh">Registration Form</h1>
+	</div>
+     <div class=" form col-md-4 col-sm-4 col-xs-12 row">
+	<form name="regForm" id="reg-form" ng-app="myApp" ng-controller="myController"  novalidate>
+		<img id="navimg"src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTrAsKrfX9dOQDg16SV9jhpur4DXd3Web_b6vd_DK5nAgC73o1J" height="100" width="100"><br><br><br>
+	    <label>Name</label><br><br>
+
+      
+  		<input type="text" placeholder=" Type your name here" name="myName" ng-model="myName" required>
+        <span class="err" ng-show="submitted&& regForm.myName.$invalid">                      
+  		<label ng-show="regForm.myName.$error.required">&nbsp;The Name is required</label>
+  		</span><br><br>
+
+		<label>Saarang Id</label><br><br>
+		
+		<input type="text" placeholder=" Enter Saarang id number" name="sid" ng-model="sid" required>
+		<span class="err" ng-show="submitted&& regForm.sid.$invalid">                      
+  		<label ng-show="regForm.sid.$error.required">&nbsp;The Saarang ID is required</label>
+  		</span><br><br>
+
+		<label>Mobile Number</label><br><br>
+		<input type="text" placeholder=" Enter Contact number" name="mobno" ng-model="mobno" ng-maxlength=
+		"10" ng-minlength="10" required>
+ 		<span class="err" ng-show="submitted && regForm.mobno.$invalid">                      
+  		<label ng-show="regForm.mobno.$error.minlength||regForm.mobno.$error.maxlength&&regForm.mobno.$error.number">&nbsp;Enter 10 digit number</label>
+  		<label ng-show="regForm.mobno.$error.required">&nbsp;Mobile Number is required</label>
+  		</span><br><br>
+
+		<label>Email Id</label><br><br>
+		<input type="email" placeholder=" Enter email id" name="mail" ng-model="mail" required>
+        <span class="err" ng-show="submitted && regForm.mail.$invalid">                      
+  		<label ng-show="regForm.mail.$error.required">&nbsp;Email is required</label>
+  		<label ng-show="regForm.mail.$error.email">&nbsp;Enter valid email id</label>
+  		</span><br><br><br>
+
+
+       <label> Which Event do you want to participate in?</label><br>
+		<select name="eve" ng-model="eve" ng-options="event for event in events" required>
+
+		</select>
+		<span class="err">                      
+  		<label ng-show="submitted&&regForm.eve.$error.required">&nbsp;Please select an event</label>
+  		</span><br><br><br><br>
+
+        <input type="submit" id="submit" class="btn btn-primary" value="Submit" ng-click="register()">
+	    <button class="btn btn-success" ng-show="regForm.$valid&&submitted" disabled="true">Submitted Succcesfully</button> 
+	</form>
+	</div>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	var app=angular.module("myApp",[]);
+	  
+	  app.controller("myController",function($scope){
+            $scope.submitted=false;
+           $scope.events=["Quiz",
+           	"Tarang",
+           "Word Games",
+           "Panache",
+           "JAM",
+           "Freestyle"];
+            $scope.register=function()
+            {
+            	$scope.submitted=true;
+
+            }
+            if($scope.submitted)
+            {$scope.submitted=!$scope.submitted;
+
+            }
+            console.log($scope.submitted);
+            });
+
+
+
+</script>
+</body>
